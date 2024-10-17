@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface TooltipProps {
-  text: string;
-  children: React.ReactNode;
-}
+import { TooltipProps } from '../types/.types';
 
 function Tooltip({ text, children }: TooltipProps) {
   return (
