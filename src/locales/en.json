@@ -1,5 +1,13 @@
 {
   "add_to_cart": "Add to cart",
   "slogan": "Stop looking for an item — find it.",
-  "header_placeholder": "Product, brand, color, …"
+  "header_placeholder": "Product, brand, color, …",
+  "label_clearsearch": "Clear search",
+  "sort_featured": "Sort by Featured",
+  "price_asc": "Price Ascending",
+  "price_desc": "Price Descending",
+  "per_pages": "products per page",
+  "cant_find": "Sorry, we can't find any matches to your query!",
+  "try_filter": "Try to reset your applied filters.",
+  "clear_filter": "Clear filter"
 }
