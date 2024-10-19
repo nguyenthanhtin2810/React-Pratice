@@ -1,5 +1,5 @@
 import React from 'react';
-import { TooltipProps } from '../types/.types';
+import { TooltipProps } from '../types/products.types';
 
 function Tooltip({ text, children }: TooltipProps) {
   return (

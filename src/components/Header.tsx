@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { HeaderProps } from '../types/.types';
+import { HeaderProps } from '../types/products.types';
 import SearchBar from './SearchBar';
 import LanguageSwitcher from './LanguageSwitcher';
 

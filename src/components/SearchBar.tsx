@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SearchBarProps } from '../types/.types';
+import { SearchBarProps } from '../types/products.types';
 import searchIcon from '../assets/icon/search.svg';
 import closeIcon from '../assets/icon/close.svg';
 
@@ -30,7 +30,7 @@ function SearchBar({ searchTerm, setSearchTerm }: SearchBarProps) {
         <button
           type="button"
           onClick={() => setSearchTerm('')}
-          aria-label="Clear search"
+          aria-label={t('label_clearsearch')}
         >
           <img
             src={closeIcon}

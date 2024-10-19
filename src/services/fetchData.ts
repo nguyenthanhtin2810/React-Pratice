@@ -1,4 +1,4 @@
-import { Product, SearchProductsProps } from '../types/.types';
+import { Product, FilterProductsProps } from '../types/products.types';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -22,20 +22,29 @@ const fetchProducts = async (param?: string): Promise<Product[]> => {
   }
 };
 
-const fetchSearchProducts = async (params: SearchProductsProps): Promise<Product[]> => {
+const fetchProductsParams = async (params: FilterProductsProps): Promise<Product[]> => {
   try {
     const matchNameProducts = await fetchProducts(`name_like=${params.nameSearch}`);
     const matchDescProducts = await fetchProducts(`description_like=${params.descSearch}`);
-    const allProducts = [...matchNameProducts, ...matchDescProducts];
 
-    const uniqueProducts = allProducts.filter(
+    const allSearchProducts = [...matchNameProducts, ...matchDescProducts];
+    const uniqueSearchProducts = allSearchProducts.filter(
       (product, index, self) => index === self.findIndex((p) => p.objectID === product.objectID),
     );
 
-    return uniqueProducts;
+    const matchSortProducts = await fetchProducts(`_sort=${params.sortBy}&_order=${params.sortOrder || 'asc'}`);
+    const intersectProducts = matchSortProducts.filter((sortProduct) => uniqueSearchProducts.some(
+      (searchProduct) => searchProduct.objectID === sortProduct.objectID,
+    ));
+
+    const offset = (params.page! - 1) * params.limit!;
+    const currentProducts = intersectProducts.slice(offset, offset + params.limit!);
+
+    params.setTotalPages(Math.ceil(intersectProducts.length / params.limit!));
+    return currentProducts;
   } catch (error) {
     throw new Error(`Error fetching products: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 };
 
-export { fetchProducts, fetchSearchProducts };
+export default fetchProductsParams;
