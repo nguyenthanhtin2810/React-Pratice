@@ -9,5 +9,9 @@
   "per_pages": "products per page",
   "cant_find": "Sorry, we can't find any matches to your query!",
   "try_filter": "Try to reset your applied filters.",
-  "clear_filter": "Clear filter"
+  "clear_filter": "Clear filter",
+  "filter": "Filter",
+  "category": "CATEGORY",
+  "brand": "BRAND",
+  "brand_placeholder": "Search for brands..."
 }

@@ -6,12 +6,13 @@ export interface Product {
   description: string;
   price: number;
   rating: number;
+  brand: string;
 }
 
 export interface ProductListProps {
   products: Product[];
   searchTerm: string;
-  setSearchTerm: (value: string) => void;
+  resetFilters: () => void;
 }
 
 export interface TooltipProps {
@@ -22,6 +23,8 @@ export interface TooltipProps {
 export interface SearchBarProps {
   searchTerm: string;
   setSearchTerm: (value: string) => void;
+  placeholder: string;
+  css: string[];
 }
 
 export interface HeaderProps {
@@ -42,6 +45,8 @@ export interface FilterProductsProps {
   page?: number;
   limit?: number;
   setTotalPages: (pages: number) => void;
+  setDisplayCategoryProducts: (products: Product[]) => void;
+  setDisplayBrandProducts: (products: Product[]) => void;
 }
 
 export interface PaginationProps {
@@ -67,4 +72,23 @@ export interface SelectProps {
   value: string | number;
   onChange: (value: string | number) => void;
   className?: string;
+}
+
+export interface CategoryFilterProps {
+  products: Product[];
+  selectedLevel1: string;
+  setSelectedLevel1: (category: string) => void;
+  selectedLevel2: string;
+  setSelectedLevel2: (category: string) => void;
+  setCategory: (page: string) => void;
+}
+
+export interface FilterHeaderProps {
+  resetFilters: () => void;
+}
+
+export interface BrandFilterProps {
+  products: Product[];
+  brands: string[];
+  setBrand: (brands: string[]) => void;
 }
