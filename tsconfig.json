@@ -15,6 +15,6 @@
     "jsx": "react-jsx",
     "typeRoots": ["./node_modules/@types", "./src/types", "./@types"]
   },
-  "include": ["src", "src/types/.types.ts"]
+  "include": ["src", "src/types/products.types.ts"]
 }
   

@@ -1,5 +1,13 @@
 {
   "add_to_cart": "Thêm vào giỏ hàng",
   "slogan": "Hãy ngừng tìm kiếm một món đồ - hãy tìm nó.",
-  "header_placeholder": "Sản phẩm, thương hiệu, màu sắc,…"
+  "header_placeholder": "Sản phẩm, thương hiệu, màu sắc,…",
+  "label_clearsearch": "Xóa tìm kiếm",
+  "sort_featured": "Sắp xếp theo đặc trưng",
+  "price_asc": "Giá tăng dần",
+  "price_desc": "Giá giảm dần",
+  "per_pages": "sản phẩm mỗi trang",
+  "cant_find": "Xin lỗi, chúng tôi không thể tìm thấy bất kỳ kết quả nào phù hợp với truy vấn của bạn!",
+  "try_filter": "Thử đặt lại bộ lọc đã áp dụng của bạn.",
+  "clear_filter": "Xóa bộ lọc"
 }
