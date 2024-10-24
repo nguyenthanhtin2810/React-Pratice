@@ -12,17 +12,28 @@ function Tooltip({ text, children }: TooltipProps) {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
       setPosition({
-        top: rect.bottom + window.scrollY + 2, 
+        top: rect.bottom + window.scrollY + 2,
         left: rect.left + rect.width / 2,
       });
       setIsVisible(true);
     }
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (event: React.MouseEvent) => {
+    const relatedTarget = event.relatedTarget as HTMLElement;
+    if (!tooltipRef.current || !tooltipRef.current.contains(relatedTarget)) {
+      setIsVisible(false);
+    }
+  };
+
+  const handleTooltipMouseEnter = () => {
+    setIsVisible(true);
+  };
+
+  const handleTooltipMouseLeave = () => {
     setIsVisible(false);
   };
-  
+
   return (
     <>
       <div
@@ -38,16 +49,18 @@ function Tooltip({ text, children }: TooltipProps) {
         createPortal(
           <div
             ref={tooltipRef}
+            onMouseEnter={handleTooltipMouseEnter}
+            onMouseLeave={handleTooltipMouseLeave}
             style={{ top: `${position.top}px`, left: `${position.left}px` }}
-            className={`absolute z-50 w-80 mt-3 transform -translate-x-1/2 p-2 text-center text-white bg-gray-800 rounded-md shadow-lg`}
+            className="absolute z-50 w-80 mt-3 transform -translate-x-1/2 p-2 text-center text-white bg-gray-800 rounded-md shadow-lg"
           >
             {text}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45 -top-1"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45 -top-1" />
           </div>,
           document.body
         )}
     </>
   );
-};
+}
 
 export default Tooltip;

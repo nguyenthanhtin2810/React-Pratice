@@ -14,6 +14,7 @@ const fetchProducts = async (param?: string): Promise<{ products: Product[]; tot
       description: hit.description,
       price: hit.price,
       rating: hit.rating,
+      brand: hit.brand,
     })) || [];
 
     const totalCount = parseInt(response.headers.get('x-total-count') || `${products.length}`, 10);
@@ -26,18 +27,19 @@ const fetchProducts = async (param?: string): Promise<{ products: Product[]; tot
 
 const buildFilterQueryString = (
   params: FilterProductsProps,
+  excludeKeys: string[],
 ): string => {
   const queryParts = [
     params.nameSearch && `name_like=${params.nameSearch}`,
-    params.category && `categories_like=${params.category}`,
-    params.brands && params.brands.map((value) => `brand=${value}`).join('&'),
+    !excludeKeys.includes('category') && params.category && `categories_like=${params.category}`,
+    !excludeKeys.includes('brands') && params.brands && params.brands.map((value) => `brand=${value}`).join('&'),
     params.minPrice && `price_gte=${params.minPrice}`,
     params.maxPrice && `price_lte=${params.maxPrice}`,
     params.rating && `rating=${params.rating}`,
     params.freeShip && `free_shipping=${params.freeShip}`,
     params.sortBy && `_sort=${params.sortBy}&_order=${params.sortOrder || 'asc'}`,
-    params.page && `_page=${params.page}`,
-    params.limit && `_limit=${params.limit}`,
+    !excludeKeys.includes('page') && params.page && `_page=${params.page}`,
+    !excludeKeys.includes('limit') && params.limit && `_limit=${params.limit}`,
   ];
 
   return queryParts.filter(Boolean).join('&');
@@ -45,8 +47,17 @@ const buildFilterQueryString = (
 
 const fetchProductsParams = async (params: FilterProductsProps): Promise<Product[]> => {
   try {
-    const queryString = buildFilterQueryString(params)
+    const queryString = buildFilterQueryString(params, []);
     const { products, totalCount } = await fetchProducts(queryString);
+
+    const excludeCategoryQueryString = buildFilterQueryString(params, ['category', 'page', 'limit']);
+    const { products: excludeCategoryQueryProducts } = await fetchProducts(excludeCategoryQueryString);
+
+    const excludeBrandsQueryString = buildFilterQueryString(params, ['brands', 'page', 'limit']);
+    const { products: excludeBrandsQueryProducts } = await fetchProducts(excludeBrandsQueryString);
+
+    params.setDisplayCategoryProducts(excludeCategoryQueryProducts);
+    params.setDisplayBrandProducts(excludeBrandsQueryProducts);
 
     params.setTotalPages(Math.ceil(totalCount / params.limit!));
     return products;

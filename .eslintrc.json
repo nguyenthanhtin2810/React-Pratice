@@ -41,7 +41,8 @@
       "react/jsx-filename-extension": [
         "error", 
         { "extensions": [".tsx", ".jsx"] }
-      ]
+      ],
+      "max-len": "off"
     }
   }
   

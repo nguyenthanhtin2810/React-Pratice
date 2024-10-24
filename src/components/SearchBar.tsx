@@ -4,7 +4,9 @@ import { SearchBarProps } from '../types/products.types';
 import searchIcon from '../assets/icon/search.svg';
 import closeIcon from '../assets/icon/close.svg';
 
-function SearchBar({ searchTerm, setSearchTerm }: SearchBarProps) {
+function SearchBar({
+  searchTerm, setSearchTerm, placeholder, css,
+}: SearchBarProps) {
   const { t } = useTranslation();
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -15,13 +17,13 @@ function SearchBar({ searchTerm, setSearchTerm }: SearchBarProps) {
       <img
         src={searchIcon}
         alt="Search icon"
-        className="h-5 w-5 absolute left-8 top-5 text-yellow-600"
+        className={`h-5 w-5 absolute text-yellow-600 ${css[0]}`}
       />
 
       <input
         type="text"
-        className="w-full text-sm text-black px-14 py-5 rounded-md border border-gray-300 focus:outline-none"
-        placeholder={t('header_placeholder')}
+        className={`w-full text-sm text-black rounded-md border border-gray-300 focus:outline-none ${css[1]}`}
+        placeholder={placeholder}
         value={searchTerm}
         onChange={handleInputChange}
       />
@@ -35,7 +37,7 @@ function SearchBar({ searchTerm, setSearchTerm }: SearchBarProps) {
           <img
             src={closeIcon}
             alt="Clear search icon"
-            className="h-5 w-5 text-black absolute right-8 top-6"
+            className={`h-5 w-5 text-black absolute ${css[2]}`}
           />
         </button>
       )}

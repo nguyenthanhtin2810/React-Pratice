@@ -5,24 +5,10 @@ import Tooltip from './Tooltip';
 import starSolid from '../assets/icon/star-solid.svg';
 import clearFilter from '../assets/icon/return.svg';
 import searchCricle from '../assets/icon/search-circle.svg';
+import highlightText from '../utils/highlightText';
 
-function ProductList({ products, searchTerm, setSearchTerm }: ProductListProps) {
+function ProductList({ products, searchTerm, resetFilters }: ProductListProps) {
   const { t } = useTranslation();
-  const highlightText = (text: string, query: string) => {
-    if (!query) return text;
-
-    const regex = new RegExp(`(${query})`, 'gi');
-    const parts = text.split(regex);
-
-    return parts.map((part, index) => {
-      const key = part.toLowerCase() === query.toLowerCase() ? `highlight-${index}` : `normal-${index}`;
-      return part.toLowerCase() === query.toLowerCase() ? (
-        <span key={key} className="bg-yellow-300">{part}</span>
-      ) : (
-        <span key={key}>{part}</span>
-      );
-    });
-  };
 
   return (
     <div>
@@ -70,7 +56,7 @@ function ProductList({ products, searchTerm, setSearchTerm }: ProductListProps) 
               </div>
             </li>
           ))}
-        </ol>      
+        </ol>
       ) : (
         <div className="flex flex-col items-center justify-center p-4 text-center">
           <div className="max-w-xs space-y-4">
@@ -83,7 +69,7 @@ function ProductList({ products, searchTerm, setSearchTerm }: ProductListProps) 
             <p className="text-md text-gray-500">{t('try_filter')}</p>
             <button
               type="button"
-              onClick={() => setSearchTerm('')}
+              onClick={resetFilters}
               className="px-4 py-2 bg-gray-200 rounded transition hover:bg-yellow-400"
             >
               <div className="flex text-sm">

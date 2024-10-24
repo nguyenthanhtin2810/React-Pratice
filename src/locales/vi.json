@@ -9,5 +9,9 @@
   "per_pages": "sản phẩm mỗi trang",
   "cant_find": "Xin lỗi, chúng tôi không thể tìm thấy bất kỳ kết quả nào phù hợp với truy vấn của bạn!",
   "try_filter": "Thử đặt lại bộ lọc đã áp dụng của bạn.",
-  "clear_filter": "Xóa bộ lọc"
+  "clear_filter": "Xóa bộ lọc",
+  "filter": "Bộ lọc",
+  "category": "LOẠI SẢN PHẨM",
+  "brand": "THƯƠNG HIỆU",
+  "brand_placeholder": "Tìm kiếm thương hiệu..."
 }

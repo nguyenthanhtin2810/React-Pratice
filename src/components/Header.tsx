@@ -18,7 +18,16 @@ function Header({ searchTerm, setSearchTerm }: HeaderProps) {
       <p className="text-4xl font-light mb-10">
         {t('slogan')}
       </p>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        placeholder={t('header_placeholder')}
+        css={[
+          'left-8 top-5',
+          'px-14 py-5',
+          'right-8 top-6',
+        ]}
+      />
       <div className="absolute top-2 right-2">
         <LanguageSwitcher />
       </div>
